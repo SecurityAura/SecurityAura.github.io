@@ -1,0 +1,23 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 1
+title = "SecurityAura Blog"
+
+[params]
+displayName = "EN"
+isoCode = "en"
+rtl = false
+dateFormat = "2 January 2006"
+description = "Quick and dirty blog for all my quick and dirty blog post needs."
+
+[[params.author.links]]
+github = "https://github.com/SecurityAura"
+
+[[params.author.links]]
+x-twitter = "https://x.com/SecurityAura"
+
+["params.author"]
+name = "SecurityAura"
+bio = "I currently work as a Manager within a DFIR team handling everything from Digital Forensics, Incident Response, Threat Hunting and Detection Engineering. And I also dabble with the Microsoft Defender XDR stack, Microsoft Sentinel and other EDRs to assist our SIEM and SOC teams."
+headline = "Everything and anything InfoSec related I come across professionnally, or personnally."

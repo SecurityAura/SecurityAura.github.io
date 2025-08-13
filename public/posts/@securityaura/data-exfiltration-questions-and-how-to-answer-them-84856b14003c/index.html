@@ -1,0 +1,902 @@
+<!doctype html>
+<html
+  lang="en"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="en">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  <title>Data Exfiltration: Questions and How to Answer Them &middot; SecurityAura Blog</title>
+    <meta name="title" content="Data Exfiltration: Questions and How to Answer Them &middot; SecurityAura Blog">
+
+  
+  <meta name="description" content="An Incident Responder insights and stories on how to approach data exfiltration">
+  
+  
+  
+  <link rel="canonical" href="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.d7672814413dccdcf76c504d9b0ebb8d0f964dbe6b30a3d4b25b15809a94c2eb732d99898aded2009aacdd1fa8b17cea1369fd81560790cd355aee00bbd142fd.css"
+    integrity="sha512-12coFEE9zNz3bFBNmw67jQ&#43;WTb5rMKPUslsVgJqUwutzLZmJit7SAJqs3R&#43;osXzqE2n9gVYHkM01Wu4Au9FC/Q==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.a187118b41a60744310065c567365de85730c8495301d0ebae41810cc6f7a47432b1de7d4f3b11338959f1ac50c266be6b4b73acf6bf770016eb59b602cc1aa0.js"
+      integrity="sha512-oYcRi0GmB0QxAGXFZzZd6FcwyElTAdDrrkGBDMb3pHQysd59TzsRM4lZ8axQwma&#43;a0tzrPa/dwAW61m2AswaoA=="
+      data-copy="Copy"
+      data-copied="Copied"></script>
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  <meta property="og:url" content="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/">
+  <meta property="og:site_name" content="SecurityAura Blog">
+  <meta property="og:title" content="Data Exfiltration: Questions and How to Answer Them">
+  <meta property="og:description" content="An Incident Responder insights and stories on how to approach data exfiltration">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-15T18:22:40+00:00">
+    <meta property="article:modified_time" content="2024-09-15T18:22:40+00:00">
+    <meta property="og:image" content="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/featured.png">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/featured.png">
+  <meta name="twitter:title" content="Data Exfiltration: Questions and How to Answer Them">
+  <meta name="twitter:description" content="An Incident Responder insights and stories on how to approach data exfiltration">
+<meta name="twitter:image" content="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/featured.png">
+    <meta property="og:image" content="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/featured.png">
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Data Exfiltration: Questions and How to Answer Them",
+    "headline": "Data Exfiltration: Questions and How to Answer Them",
+    "description": "An Incident Responder insights and stories on how to approach data exfiltration",
+    
+    "inLanguage": "en",
+    "url" : "http:\/\/192.168.50.40:1313\/posts\/@securityaura\/data-exfiltration-questions-and-how-to-answer-them-84856b14003c\/",
+    "author" : {
+      "@type": "Person",
+      "name": "SecurityAura"
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-09-15T18:22:40\u002b00:00",
+    "datePublished": "2024-09-15T18:22:40\u002b00:00",
+    
+    "dateModified": "2024-09-15T18:22:40\u002b00:00",
+    
+    
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "2795"
+  }]
+  </script>
+
+
+
+  
+  
+    <meta name="author" content="SecurityAura">
+  
+  
+    
+      
+        
+          <link href="https://github.com/SecurityAura" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://x.com/SecurityAura" rel="me">
+        
+      
+    
+  
+
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js" integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj&#43;KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>
+        Skip to main content
+      </a>
+    </div>
+    
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+  class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 pt-[2px] pr-0 pb-[3px] pl-0">
+  
+  
+
+  <div class="flex flex-1 items-center justify-between">
+    <nav class="flex space-x-3">
+      
+        <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">
+          SecurityAura Blog
+        </a>
+      
+    </nav>
+    
+  <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+    
+      
+        
+  <a
+  href="/about-me/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="About Me">
+    About Me
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    Posts
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href=""
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="">
+    
+  </p>
+</a>
+
+
+
+      
+    
+
+    
+
+    
+
+    
+      <button
+        id="search-button"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="Search (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <div class=" flex items-center">
+        <button
+          id="appearance-switcher"
+          aria-label="Dark mode switcher"
+          type="button"
+          class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+          <div class="flex items-center justify-center dark:hidden">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+          </div>
+          <div class="items-center justify-center hidden dark:flex">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+          </div>
+        </button>
+      </div>
+    
+  </nav>
+
+    
+  <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+    <span></span>
+
+    
+
+    
+
+    
+      <button
+        id="search-button-mobile"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="Search (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <button
+        id="appearance-switcher-mobile"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400 ltr:mr-1 rtl:ml-1">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    
+  </div>
+
+  </div>
+  
+  <div class="-my-2 md:hidden">
+    <div id="menu-button" class="block">
+      
+        <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+        </div>
+        <div
+          id="menu-wrapper"
+          class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 pt-[5px]">
+          <ul
+            class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+            <li id="menu-close-button">
+              <span
+                class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+                <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+              </span>
+            </li>
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/about-me/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="About Me">
+      About Me
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      Posts
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href=""
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="">
+      
+    </p>
+  </a>
+</li>
+
+
+
+            
+
+          </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Data Exfiltration: Questions and How to Answer Them
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2024-09-15T18:22:40&#43;00:00">15 September 2024</time><span class="px-2 text-primary-500">&middot;</span><span>2795 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">14 mins</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+  
+  
+
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          
+<h3 class="relative group">Premise 
+    <div id="premise" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#premise" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Warning: Wall of text ahead! Sorry for the screenshots/images lovers (and I am one!).</p>
+<p>The information presented in this article, on top of the various insights offered comes from my few years of experience in Incident Response. It is not an absolute truth and there are many different ways to answer the questions presented here. However, this article aims to give insight in what kind of questions are asked in incidents where data exfiltration occured or may have occurred and ways to answer them.</p>
+<p>This article is mainly based on ransomware and/or data exfiltration incidents at a host and/or network-based level.</p>
+<p>At some point in time, I may post other articles related to data exfil with additional insights and/or stories.</p>
+
+<h3 class="relative group">Introduction 
+    <div id="introduction" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#introduction" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Whenever you deal with an incident where a threat actor managed to get access to an environment, one of the biggest investigation track you’ll have to work on is the data exfil one. In ransomware incidents and/or incidents where a victim received a ransom demand, the first and biggest question that will be asked is: did data exfiltration occur? In these incidents, if you can quickly identify which threat actor you’re dealing with, you can already assess with a good level of confidence if data was exfiltrated or not. That’s why, at the beginning of these incidents, one of the first steps will be to call in a breach coach. From an incident responder’s perspective, the breach coach is seen as the party that will assist the victim with assessing the risk of a data exfil and the data that would’ve been exfiltrated. They’ll also provide guidance on the notification process, should people whose data have been “stolen” need to be contacted.</p>
+<p>While a lot of companies (even SMBs) may think that they do not hold any kind of sensitive data, such as PII, PHI, etc. and therefore, notification to impacted people would not be necessary, I typically ask them if they have any kind of HR and/or payroll information. Most of them will say yes, meaning that in these situations, these people (employees, ex-employees, contractors, etc.) would need to be notified. It shows that even in 2024, companies may not even be aware of the kind of data they hold, nor what they represent and their classification.</p>
+
+<h3 class="relative group">The Questions 
+    <div id="the-questions" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#the-questions" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>When it comes to data exfil, multiple questions need to be answered or in short: anything and everything. For the purpose of this article, you can see these questions as:</p>
+<ul>
+<li>If — Did data exfil even occur? This is usually confirmed (or infirmed) by answering any of the remaining questions</li>
+<li>How much — How much data was exfiltrated? Are we talking about a couple of documents? A few MB? Or multiple GB, even a whole TB?</li>
+<li>How — How was the data exfiltrated? Was it uploaded to a cloud service? Was it sent via SFTP to a remote server in another country?</li>
+<li>When — At which point in the incident did the data exfil occur? How long did it last? In ransomware cases, was it just before the ransomware payload was deployed? Was it days before?</li>
+<li>What — The hardest question of all the answer: what data was exfiltrated? Which files, folders, network shares, etc. were exfiltrated by the threat actor during that attack?</li>
+</ul>
+<p>The ability to answer these questions depends on so many factors (even a bit of luck sometimes) that it is impossible in my opinion and experience to go in a new incident and tell a victim that you’ll be able to answer all of them. You’ll always do your best at answering as many of them as you can in the most complete way possible too.</p>
+
+<h3 class="relative group">If — Did data exfil even occur? 
+    <div id="ifdid-data-exfil-evenoccur" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#ifdid-data-exfil-evenoccur" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Depending on the incident and what kind of information is available to you when you get called in, you may already have the answer to that question. Or at very least, can heavily suspect the answer.</p>
+<p>For instance, if you get called in on a ransomware where you can quickly identify the threat actor group (through the ransom note, encrypted file extension, etc.) and you know that this group is known to leak/publish stolen data (e.g.: a Dedicated/Data Leak Site (DLS)), you already know that chances of data exfil are high.</p>
+<p>Otherwise, answering this question in a positive or negative fashion is usually dependent on the other questions. If you are able to positively answer any of the other questions, you pretty much confirmed that data exfil occurred.</p>
+
+<h3 class="relative group">How much — How much data was exfiltrated? 
+    <div id="how-muchhow-much-data-was-exfiltrated" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#how-muchhow-much-data-was-exfiltrated" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Alongside the “What”, one of the hardest question to answer. Answering this question is typically highly dependent on having a way to measure/calculate the amount of data that went out of a network. May it be through firewalls, NDRs, the ISP and/or even host-based artifacts (such as SRU).</p>
+<p>Most next-gen firewalls now have very nice dashboards that can help you quickly see how many GB of data was downloaded/uploaded in various situations: top source, top destination, top application, top web filter, etc. This is probably one of the easiest way to answer this question. For instance, if you see that the Top Source in the firewall dashboard is the file server that uploaded 100 GB of data, and when you drill down on the details, you see that 90 GB of that data was uploaded through port 22 to an IP address in another country that has no association with the victim, you can already deduce what you should do next. Investigate that server for artifacts which would show that data was explicitly sent out by the threat actor (or at least, through means or actions not known to the victim).</p>
+<p>For firewalls and/or NDRs that do not have dashboards and/or reports available, you can usually still answer that question using the raw logs. If you can export the capture traffic logs, and these logs have the sent/received bytes fields, and you know how to interpret them (e.g.: are the values incremental), you can whip up a quick script in your favorite language and/or throw the logs in your favorite SIEM to calculate the amount of bytes that was sent out. Therefore, giving you the possible amount of data that was exfiltrated.</p>
+<p>And in situations where the victim (or you, the Incident Responder, depending on how you look at it) does not have firewall logs available (e.g.: logs were in memory and it was rebooted before you get called in) or a NDR, from a network perspective, your last hope would be to request the logs from the ISP. If you’re lucky, the victim’s ISP will be able to generate bandwidth usage and/or download/upload reports for the last X days (covering the attack period). From there, if you’re able to answer the “When”, you may be able to get a glimpse as to how much data could have been exfiltrated, at a maximum. For instance, if you find out that data exfil occurred on the 14th of the month, and the ISP report shows that on that day, 150 GB of data went out, you can say that at the very least, a maximum of 150 GB of data (of an unknown type: raw files? archives?) could have been exfiltrated.</p>
+<p>Last but not least, host forensics could provide you with that answer if you’re lucky enough to access certain artifacts which would help you quantify the amount of data that was sent out (e.g.: SRUM). However, when the data exfil is done on a Windows Server, SCRUM is rarely enabled and therefore, data collected.</p>
+<p>A few other ways to answer that question can also be found in answering the “What” one.</p>
+
+<h3 class="relative group">How — How was the data exfiltrated? 
+    <div id="howhow-was-the-data-exfiltrated" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#howhow-was-the-data-exfiltrated" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>The “How” question usually gets answered relatively quickly and/or easily as you investigate the incident. For instance, when performing host forensics on a system and looking at the UserAssist artifacts for a user you know the threat actor used, and find that he executed WinSCP.exe or rclone.exe, you already have the beginning of an answer.</p>
+<p>From a host-based perspective, reviewing the processes that were executed during the timeframe of an attack will most often yield the answer to that question. If the exfil was done through a program and/or process that is typically associated with data exfil (such as WinSCP, rclone above), chances are it’ll show up in your forensics.</p>
+<p>From a network point of view, you may already be able to answer that question or at least, have an idea on how to answer it if you were able to answer the “How much” one. If you find out that the file server sent 90 GB of data to a remote server outside of the country via SSH, you can then use that information in your host-based analysis to focus on ways a threat actor could exfil data through SSH on a host (ex: WinSCP, rclone, even pure SCP).</p>
+<p>Overall, that question is usually one of the easiest to answer, assuming anti-forensics wasn’t performed or the systems on which data exfil occurred were not encrypted. Ransomware can encrypt a lot of artifacts and evidences that would be useful in determining how data was exfiltrated, which can make it easier to answer that question.</p>
+
+<h3 class="relative group">When — At which point in the incident did the data exfil occur? 
+    <div id="whenat-which-point-in-the-incident-did-the-data-exfiloccur" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#whenat-which-point-in-the-incident-did-the-data-exfiloccur" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Another question that can usually be answered relatively easily through the “How much” and “How” questions.</p>
+<p>The easiest way to answer it being through network analysis. If you have access to firewall logs and can identify exactly when the first SSH connections to that remote server started and when they ended, you have yourself the timeframe on which the data exfil took place. You can then use that information with other sources of information such as the ISP bandwidth usage and/or download/upload reports. If these reports are broken down by hours for instance instead of days, you may be able to get a more accurate number when it comes to the size of the data that was sent out. In situations where the data exfil started on one day, for instance, on the 15th, and ended on another, let’s say the 16th, if the ISP reports are broken down in 24h periods, you would have to addition together the full size of both days of upload to get an estimate as to how much data, at maximum, could have been exfiltrated.</p>
+<p>From a host perspective, determining when the threat actor was active on the compromised system from which the exfil was done from will yield that answer. Depending on the artifacts available, you may be easily able to determine when the data exfil started. For instance, if rclone was launched on the 14th at 4:00 PM UTC, you know that at the very least, this is when the data exfil started. From there, you would need to find another indicator which you could use to determine the end of the exfil. For instance, when the SRU stopped logging information for the rclone process and/or when the ransomware payload was launched. Usually, the data exfil will be finished before the threat actor launches the ransomware. Otherwise, the data they’re trying to exfil would just end up being encrypted, which kinds of defeat the purpose.</p>
+
+<h3 class="relative group">What — The hardest question of all the answer: what data was exfiltrated? 
+    <div id="whatthe-hardest-question-of-all-the-answer-what-data-was-exfiltrated" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#whatthe-hardest-question-of-all-the-answer-what-data-was-exfiltrated" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>The whole “data exfil” concept aside, by far, the most difficult question to answer. And sadly, the most important one for the victim, but also the breach coach. Your answer to this question, or whatever information you can get to try to answer that question will often determine the next course of action for the victim and the breach coach when it comes to risk assessment (for the exposure) and the notification process.</p>
+<p>I’ve never been able to answer that question at 100% on all the incidents I’ve worked on so far. And I doubt that anyone else did (but if you did, please share with me how you do it because that is one impressive feat!). If I was to breakdown what allowed me to answer this question in its entirety, or partially, in situations it would be:</p>
+<ul>
+<li>No anti-forensics from the threat actor (read: not even cleaning up after themselves)</li>
+<li>Good ol’ forensics (network or host-based)</li>
+<li>Unexpected help</li>
+</ul>
+<p>The first situation is definitely one of the easiest way to answer that question. In incidents where the threat actor staged the data before exfiltrating it (e.g.: creating ZIP, RAR, 7Z, etc. archives), if the archives are still present when you get called in, all you need to do is grab them and pass them to the victim for its review. This also allows you to answer the “How much” question at the same time, since you have the size of the archive(s), but most importantly, their content.</p>
+<p>As far as forensics goes, depending on how the data exfil (and even data staging!) was done, there may be ways to replicate and/or even emulate it with the evidence you’ll uncover. For instance, if the threat actor used a PowerShell command and/or a script to stage the data or exfil it by targeting the exfil process/binary at a folder or server, you can reproduce these commands or run the script (modify it for a “report-only” mode, kind of) in order to get an idea of what data would’ve targeted. This method has caveat obviously in the sense that, depending on the commands that were executed, the time at which they were executed, etc. your results may not yield at 100% the data the threat actor obtained when he executed them at his point in time. For instance, if a rclone command that grabs file that were modified in the last 3 months to exfil them was ran, but you find this it 1–2 weeks after the the fact, you would need to adjust it to target files as accurately as possible. Same thing if you manage to uncover (or recover) a script that was used to staged data by invoking WinRAR to create archives. If you have the WinRAR commands and the folders it targeted, you can replicate it, create the archives and from there, have a good idea of which files would’ve been included in the threat actors’ archives when they were exfiltrated.</p>
+<p>Last but not least is … luck (or unexpected help, depending on how you want to see it)! Depending on the environment you investigate, you never know which solutions, configuration and/or logging are in place. And amongst this, there may be something that could assist you in answering the dreaded “What” question. I worked on an incident where an Application Whitelisting solution was deployed on the server where the data exfil was executed from, in learning mode. So while it did not block anything, it did log the 50,000+ files that were accessed by the WinSCP process that was used to send the data to a remote server over SFTP. The lesson to retain here is to make use of anything and everything you have access to. This is why a good understanding of the environment you’re investigating is critical since you may be able to identify something that could help you answering this question.</p>
+
+<h3 class="relative group">Conclusion 
+    <div id="conclusion" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#conclusion" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>As I finish writing this article, I realize that it may be a tad bit longer than what I intended it to be. At the same time however, there is so much more that could be said on the subject and the various questions that each of them could deserve its own article.</p>
+<p>In the end, while the data exfiltration angle can be hard to investigate, there is multiple ways to go at it. In a perfect environment where you have a firewall, an EDR, a NDR, etc. answering most of these questions should be a piece of cake. However, the reality is (at least, mine) that this kind of setup is an utopia for the most part, even more so when it comes to SMBs. At most, you’ll have access to decent host-forensics and firewall logs, but that’s it. That’s why knowing how to answer these questions with what you have is important, but even more so, being able to verbalize and explain to the victim and breach coach the limitations and restrictions when it comes to investigating data exfil. That often, you may not get answer to all these questions, nor even one of them.</p>
+<p>This being said, hopefully this article exposed you to my bit (and the bit of many other incident responders!) of reality when it comes to dealing with incidents involving data exfil and even given you ideas on how to investigate your own (right now, or the next one(s)!).</p>
+<p>Till then, see you next time!</p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js"
+          integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA=="
+          data-oid="views_Posts/1754936807342-Data-Exfiltration-Questions-and-How-to-Answer-Them/index.md"
+          data-oid-likes="likes_Posts/1754936807342-Data-Exfiltration-Questions-and-How-to-Answer-Them/index.md"></script>
+      
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/posts/@securityaura/microsoft-unified-audit-log-ual-what-you-come-to-learn-the-hard-way-905a087a1558/">
+              <span class="flex flex-col">
+                <span class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Microsoft Unified Audit Log (UAL): What You Come To Learn The Hard Way</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2024-12-17T03:58:02&#43;00:00">17 December 2024</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0 z-10">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top"
+    title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+      
+      
+        
+      
+      
+      
+      
+      <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 overflow-x-auto py-2">
+        <ul class="flex list-none flex-row">
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ltr:mr-4 rtl:ml-4">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href=""
+                title="">
+                
+                
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          SecurityAura
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://192.168.50.40:1313/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

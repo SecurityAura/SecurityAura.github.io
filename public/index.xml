@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SecurityAura Blog</title>
+    <link>http://192.168.50.40:1313/</link>
+    <description>Recent content on SecurityAura Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2025 SecurityAura</copyright>
+    <lastBuildDate>Mon, 11 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.50.40:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>About Me</title>
+      <link>http://192.168.50.40:1313/about-me/</link>
+      <pubDate>Mon, 11 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.50.40:1313/about-me/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Looking Back On #100DaysOfKQL</title>
+      <link>http://192.168.50.40:1313/posts/@securityaura/looking-back-on-100daysofkql-bf526b3d214e/</link>
+      <pubDate>Sat, 17 May 2025 18:39:45 +0000</pubDate>
+      
+      <guid>http://192.168.50.40:1313/posts/@securityaura/looking-back-on-100daysofkql-bf526b3d214e/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://192.168.50.40:1313/posts/@securityaura/looking-back-on-100daysofkql-bf526b3d214e/featured.jpg" />
+    </item>
+    
+    <item>
+      <title>Microsoft Unified Audit Log (UAL): What You Come To Learn The Hard Way</title>
+      <link>http://192.168.50.40:1313/posts/@securityaura/microsoft-unified-audit-log-ual-what-you-come-to-learn-the-hard-way-905a087a1558/</link>
+      <pubDate>Tue, 17 Dec 2024 03:58:02 +0000</pubDate>
+      
+      <guid>http://192.168.50.40:1313/posts/@securityaura/microsoft-unified-audit-log-ual-what-you-come-to-learn-the-hard-way-905a087a1558/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://192.168.50.40:1313/posts/@securityaura/microsoft-unified-audit-log-ual-what-you-come-to-learn-the-hard-way-905a087a1558/featured.png" />
+    </item>
+    
+    <item>
+      <title>Data Exfiltration: Questions and How to Answer Them</title>
+      <link>http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/</link>
+      <pubDate>Sun, 15 Sep 2024 18:22:40 +0000</pubDate>
+      
+      <guid>http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://192.168.50.40:1313/posts/@securityaura/data-exfiltration-questions-and-how-to-answer-them-84856b14003c/featured.png" />
+    </item>
+    
+  </channel>
+</rss>
