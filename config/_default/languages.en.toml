@@ -10,12 +10,22 @@ isoCode = "en"
 rtl = false
 dateFormat = "2 January 2006"
 description = "Quick and dirty blog for all my quick and dirty blog post needs."
+logo = "SecurityAura.jpg"
+
+[[params.author.links]]
+x-twitter = "https://x.com/SecurityAura"
+
+[[params.author.links]]
+bluesky = "https://bsky.app/profile/securityaura.bsky.social"
+
+[[params.author.links]]
+mastodon = "https://infosec.exchange/@SecurityAura"
 
 [[params.author.links]]
 github = "https://github.com/SecurityAura"
 
 [[params.author.links]]
-x-twitter = "https://x.com/SecurityAura"
+medium = "https://medium.com/@securityaura"
 
 ["params.author"]
 name = "SecurityAura"

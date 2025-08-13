@@ -20,6 +20,7 @@ verification = { }
 rssnext = { }
 advertisement = { }
 defaultBackgroundImage = "site_background.png"
+smartTOC = true
 
 [header]
 layout = "basic"
@@ -32,7 +33,7 @@ showAppearanceSwitcher = true
 showScrollToTop = true
 
 [homepage]
-layout = "profile"
+layout = "background"
 showRecent = true
 showRecentItems = "5"
 showMoreLink = false
@@ -41,7 +42,7 @@ cardView = false
 cardViewScreenWidth = false
 layoutBackgroundBlur = false
 disableHeroImageFilter = false
-homepageImage = "SecurityAura.jpg"
+homepageImage = "site_background.png"
 
 [article]
 showDate = true
@@ -62,7 +63,7 @@ showHeadingAnchors = true
 showPagination = true
 invertPagination = false
 showReadingTime = true
-showTableOfContents = false
+showTableOfContents = true
 showTaxonomies = false
 showCategoryOnly = false
 showAuthorsBadges = false
