@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© 2025 SecurityAura</copyright>
-    <lastBuildDate>Mon, 11 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.50.40:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.50.40:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Ransomware in SMBs: Top 5 Missing or Incomplete Controls That Could Help Prevent or Cripple Attackers</title>
+      <link>http://192.168.50.40:1313/posts/1755787102398-ransomware-in-smbs-top-5-missing-or-incomplete-controls-that-could-help-prevent-or-cripple-attackers/</link>
+      <pubDate>Thu, 21 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.50.40:1313/posts/1755787102398-ransomware-in-smbs-top-5-missing-or-incomplete-controls-that-could-help-prevent-or-cripple-attackers/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://192.168.50.40:1313/posts/1755787102398-ransomware-in-smbs-top-5-missing-or-incomplete-controls-that-could-help-prevent-or-cripple-attackers/featured.png" />
+    </item>
     
     <item>
       <title>About Me</title>
