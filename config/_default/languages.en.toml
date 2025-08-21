@@ -9,8 +9,8 @@ displayName = "EN"
 isoCode = "en"
 rtl = false
 dateFormat = "2 January 2006"
-description = "Quick and dirty blog for all my quick and dirty blog post needs."
-logo = "SecurityAura.jpg"
+description = "Quick and dirty blog for all my quick and dirty InfoSec blog post needs."
+logo = "SecurityAura.png"
 
 [[params.author.links]]
 x-twitter = "https://x.com/SecurityAura"
@@ -30,4 +30,4 @@ medium = "https://medium.com/@securityaura"
 ["params.author"]
 name = "SecurityAura"
 bio = "I currently work as a Manager within a DFIR team handling everything from Digital Forensics, Incident Response, Threat Hunting and Detection Engineering. And I also dabble with the Microsoft Defender XDR stack, Microsoft Sentinel and other EDRs to assist our SIEM and SOC teams."
-headline = "Everything and anything InfoSec related I come across professionnally, or personnally."
+headline = "Everything and anything InfoSec related I come across professionally, or personnally."
